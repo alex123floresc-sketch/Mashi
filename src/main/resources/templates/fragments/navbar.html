@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div class="ui fixed inverted teal menu" th:fragment="navbar(titulo)">
+<div class="ui fixed inverted teal menu" th:fragment="navbar(titulo, extras)">
     <div class="ui container">
         <a class="header item">Mashi</a>
         <a class="item active" th:text="${titulo}">Seccion</a>
+        <a class="item" th:each="extra : ${extras}" th:href="${extra.href}" th:text="${extra.label}">Extra</a>
         <div class="right menu">
             <div class="item" id="nombre-usuario"></div>
             <a class="item" id="btn-logout">Salir</a>

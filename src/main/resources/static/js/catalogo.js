@@ -75,26 +75,6 @@ $(function () {
         }
     }
 
-    async function cargarComprobantes() {
-        try {
-            const comprobantes = await Api.get('/api/comprobantes/mios');
-            const filas = $('#filas-comprobantes').empty();
-            comprobantes.forEach(c => {
-                filas.append(`
-                    <tr>
-                        <td>${c.numero}</td>
-                        <td>${c.tipo}</td>
-                        <td>${formatoMoneda(c.total)}</td>
-                        <td>${c.estado}</td>
-                        <td>${new Date(c.fechaEmision).toLocaleString()}</td>
-                    </tr>
-                `);
-            });
-        } catch (err) {
-            // el panel de comprobantes es informativo, no bloquea el resto de la pagina
-        }
-    }
-
     $('#select-tipo-comprobante').on('change', function () {
         const esFactura = this.value === 'FACTURA';
         $('#input-documento-comprobante')
@@ -115,7 +95,6 @@ $(function () {
                 clienteNombre: this.clienteNombre.value
             });
             $('#mensaje-exito-comprobante').text('Comprobante ' + comprobante.numero + ' emitido. Total: ' + formatoMoneda(comprobante.total)).show();
-            await cargarComprobantes();
         } catch (err) {
             $('#mensaje-error-comprobante').text(err.message).show();
         }
@@ -143,5 +122,4 @@ $(function () {
 
     cargarProductos();
     cargarCarrito();
-    cargarComprobantes();
 });
