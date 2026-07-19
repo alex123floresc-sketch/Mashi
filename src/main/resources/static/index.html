@@ -7,12 +7,67 @@
           href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css">
 </head>
 <body>
-<div class="ui container">
-    <h1 class="ui header">Mashi</h1>
+<div class="ui middle aligned center aligned grid" style="height: 100vh;">
+    <div class="column" style="max-width: 420px;">
+        <h1 class="ui teal header">
+            Mashi
+            <div class="sub header">e-commerce omnicanal</div>
+        </h1>
+
+        <div class="ui segment">
+            <div class="ui top attached tabular menu">
+                <a class="item active" data-tab="login">Ingresar</a>
+                <a class="item" data-tab="registro">Registrarse</a>
+            </div>
+
+            <div class="ui bottom attached tab segment active" data-tab="login">
+                <form class="ui form" id="form-login">
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="field">
+                        <label>Contrasena</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button class="ui teal fluid submit button" type="submit">Ingresar</button>
+                </form>
+            </div>
+
+            <div class="ui bottom attached tab segment" data-tab="registro">
+                <form class="ui form" id="form-registro">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="nombre" required>
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="field">
+                        <label>Contrasena</label>
+                        <input type="password" name="password" required minlength="8">
+                    </div>
+                    <div class="field">
+                        <label>Rol</label>
+                        <select name="rol" class="ui dropdown">
+                            <option value="CLIENTE">Cliente</option>
+                            <option value="VENDEDOR">Vendedor</option>
+                            <option value="ADMINISTRADOR">Administrador</option>
+                        </select>
+                    </div>
+                    <button class="ui teal fluid submit button" type="submit">Registrarse</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="ui error message" id="mensaje-error" style="display:none;"></div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>
+<script src="/js/api.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

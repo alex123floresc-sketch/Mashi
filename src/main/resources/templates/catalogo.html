@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mashi - Catalogo</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar(titulo='Catalogo')}"></div>
+
+<div class="ui container" style="margin-top: 6em;">
+    <div class="ui grid">
+        <div class="ten wide column">
+            <h2 class="ui header">Productos</h2>
+            <div class="ui error message" id="mensaje-error-productos" style="display:none;"></div>
+            <div class="ui three stackable cards" id="lista-productos"></div>
+        </div>
+
+        <div class="six wide column">
+            <h2 class="ui header">Mi carrito</h2>
+            <div class="ui error message" id="mensaje-error-carrito" style="display:none;"></div>
+            <div class="ui success message" id="mensaje-exito-carrito" style="display:none;"></div>
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cant.</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="filas-carrito"></tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="2">Total</th>
+                    <th colspan="2" id="total-carrito">S/ 0.00</th>
+                </tr>
+                </tfoot>
+            </table>
+            <button class="ui teal fluid button" id="btn-checkout">Finalizar compra</button>
+
+            <div class="ui segment" id="panel-comprobante" style="display:none; margin-top: 1em;">
+                <h4 class="ui header">Emitir comprobante del pedido #<span id="pedido-comprobante-id"></span></h4>
+                <div class="ui error message" id="mensaje-error-comprobante" style="display:none;"></div>
+                <div class="ui success message" id="mensaje-exito-comprobante" style="display:none;"></div>
+                <form class="ui form" id="form-comprobante">
+                    <div class="field">
+                        <label>Tipo de comprobante</label>
+                        <select class="ui dropdown" name="tipo" id="select-tipo-comprobante">
+                            <option value="BOLETA">Boleta (DNI)</option>
+                            <option value="FACTURA">Factura (RUC)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Documento</label>
+                        <input type="text" name="clienteDocumento" id="input-documento-comprobante" placeholder="DNI (8 digitos)" required>
+                    </div>
+                    <div class="field">
+                        <label>Nombre / Razon social</label>
+                        <input type="text" name="clienteNombre" required>
+                    </div>
+                    <button class="ui teal button" type="submit">Emitir comprobante</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui grid" style="margin-top: 2em;">
+        <div class="sixteen wide column">
+            <h2 class="ui header">Mis comprobantes</h2>
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Tipo</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                </tr>
+                </thead>
+                <tbody id="filas-comprobantes"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/catalogo.js"></script>
+</body>
+</html>

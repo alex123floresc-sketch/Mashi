@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mashi - POS</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar(titulo='Punto de venta')}"></div>
+
+<div class="ui container" style="margin-top: 6em;">
+    <div class="ui grid">
+        <div class="seven wide column">
+            <h2 class="ui header">Escanear codigo QR</h2>
+            <div id="qr-reader" style="width: 100%;"></div>
+            <div class="ui error message" id="mensaje-error-scanner" style="display:none;"></div>
+
+            <div class="ui form" style="margin-top: 1em;">
+                <div class="fields">
+                    <div class="thirteen wide field">
+                        <input type="text" id="input-sku-manual" placeholder="Ingresar SKU manualmente">
+                    </div>
+                    <div class="three wide field">
+                        <button class="ui teal fluid button" id="btn-agregar-manual">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nine wide column">
+            <h2 class="ui header">Venta actual</h2>
+            <div class="ui error message" id="mensaje-error-venta" style="display:none;"></div>
+            <div class="ui success message" id="mensaje-exito-venta" style="display:none;"></div>
+            <table class="ui celled table">
+                <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Producto</th>
+                    <th>Cant.</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="filas-venta"></tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th colspan="2" id="total-venta">S/ 0.00</th>
+                </tr>
+                </tfoot>
+            </table>
+            <button class="ui teal fluid button" id="btn-registrar-venta">Registrar venta</button>
+
+            <div class="ui segment" id="panel-comprobante" style="display:none; margin-top: 1em;">
+                <h4 class="ui header">Emitir comprobante de la venta #<span id="venta-comprobante-id"></span></h4>
+                <div class="ui error message" id="mensaje-error-comprobante" style="display:none;"></div>
+                <div class="ui success message" id="mensaje-exito-comprobante" style="display:none;"></div>
+                <form class="ui form" id="form-comprobante">
+                    <div class="field">
+                        <label>Tipo de comprobante</label>
+                        <select class="ui dropdown" name="tipo" id="select-tipo-comprobante">
+                            <option value="BOLETA">Boleta (DNI)</option>
+                            <option value="FACTURA">Factura (RUC)</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Documento</label>
+                        <input type="text" name="clienteDocumento" id="input-documento-comprobante" placeholder="DNI (8 digitos)" required>
+                    </div>
+                    <div class="field">
+                        <label>Nombre / Razon social</label>
+                        <input type="text" name="clienteNombre" required>
+                    </div>
+                    <button class="ui teal button" type="submit">Emitir comprobante</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/pos.js"></script>
+</body>
+</html>

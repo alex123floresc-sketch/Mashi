@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="ui fixed inverted teal menu" th:fragment="navbar(titulo)">
+    <div class="ui container">
+        <a class="header item">Mashi</a>
+        <a class="item active" th:text="${titulo}">Seccion</a>
+        <div class="right menu">
+            <div class="item" id="nombre-usuario"></div>
+            <a class="item" id="btn-logout">Salir</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
